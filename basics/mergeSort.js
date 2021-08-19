@@ -28,4 +28,6 @@ const mergeSort = (array) => {
   return merge(mergeSort(left), mergeSort(right));
 };
 
+console.time();
 console.log(mergeSort(array));
+console.timeEnd(); // 8.2ms

@@ -36,4 +36,6 @@ const heapSort = (array) => {
   return array;
 };
 
+console.time();
 console.log(heapSort(array));
+console.timeEnd(); // 8ms

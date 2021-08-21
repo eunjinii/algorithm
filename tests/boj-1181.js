@@ -36,14 +36,30 @@ const solution = (input) => {
     let temp = array[0];
     array[0] = array[lastIndex];
     array[lastIndex] = temp;
-    console.log(array[lastIndex]);
 
     array = [...heapify(array.slice(0, lastIndex)), ...array.slice(lastIndex)];
     lastIndex--;
   }
+
+  let count = 1;
+  for (let i = 0; i < array.length - 1; i++) {
+    // 지금거랑 다음거랑 자릿수 같으면 같은거 카운트 + 1
+    if (array[i + 1] && array[i].length === array[i + 1].length) {
+      count++;
+      continue;
+    }
+
+    array = [
+      ...array.slice(0, i - count + 1),
+      ...array.slice(i - count + 1, i + 1).sort(),
+      ...array.slice(i + 1),
+    ];
+    count = 1;
+  }
+
   return array;
 };
 
 console.time();
 console.log(solution(input));
-console.timeEnd();
+console.timeEnd(); // 7.2 ~7.6ms

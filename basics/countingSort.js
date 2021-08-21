@@ -5,7 +5,7 @@ const array = [
 
 const countingSort = (array) => {
   // 주어진 최대 크기대로의 길이를 가지는 배열에 원소 0 넣어줌
-  let countArray = [...Array(6)].fill(0);
+  let countArray = Array(6).fill(0);
 
   // 입력값 돌면서 countArray를 1씩 올려줌
   array.forEach((num) => countArray[num - 1]++);
@@ -15,7 +15,7 @@ const countingSort = (array) => {
 
   // 차례로 출력해줌
   for (let i = 0; i < countArray.length; i++) {
-    const temp = [...Array(countArray[i])].fill(i);
+    const temp = Array(countArray[i]).fill(i + 1);
     result = [...result, ...temp];
   }
 

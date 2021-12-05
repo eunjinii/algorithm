@@ -1,3 +1,6 @@
+// https://leetcode.com/explore/learn/card/recursion-i/251/scenario-i-recurrence-relation/3234/
+// Pascal's Triangle II
+
 /**
  * @param {number} rowIndex
  * @return {number[]}

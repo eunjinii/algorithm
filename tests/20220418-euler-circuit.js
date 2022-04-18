@@ -13,7 +13,7 @@ const makeGraph = (words) => {
             words[i].charAt(words[i].length - 1).charCodeAt(0) -
             "a".charCodeAt(0);
         graph[u][v] = 1;
-        wordsMap[u][v] = [...wordsMap[u][v], ...words[i]];
+        wordsMap[u][v] = [...wordsMap[u][v], words[i]];
         indegree[v]++;
         outdegree[u]++;
     }
@@ -33,7 +33,7 @@ const solution = (words) => {
     const getEulerForDirectedGraph = (here, circuit) => {
         for (let there = 0; there < graph.length; there++) {
             while (graph[here][there] > 0) {
-                graph[here][there]--;
+                graph[here][there]--; // 방향그래프라 여기서 저기로 가는 간선만 지우면 됨.
                 getEulerForDirectedGraph(there);
             }
         }
@@ -43,13 +43,16 @@ const solution = (words) => {
     const getEulerTrailOrCircuit = () => {
         let circuit = [];
 
+        // 오일러 트레일 먼저 판단해서 리턴한다.
         for (let i = 0; i < graph.length; i++) {
             if ((outdegree[i] = indegree[i] + 1)) {
+                // 나가는 간선이 들어오는 간선보다 1개 많으면 오일러 트레일.
                 getEulerForDirectedGraph(i, circuit);
                 return circuit;
             }
         }
 
+        // 그냥 아무데서나 시작한다.
         for (let i = 0; i < graph.length; i++) {
             if (outdegree[i]) {
                 getEulerForDirectedGraph(i, circuit);
